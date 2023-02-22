@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var baseBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         color: INPUT_BORDER_COLOR,
         width: 1.0,
       ),
@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         errorText: errorText,
         // hintText의 색상을 BODY_TEXT_COLOR로 설정하고 fontSize를 14로 설정한다
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: BODY_TEXT_COLOR,
           fontSize: 14,
         ),
