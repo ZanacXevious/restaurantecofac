@@ -45,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
         filled: true,
         // input border를 테두리로 두르고 색상을 INPUT_BORDER_COLOR로 설정한다
         border: baseBorder,
+        enabledBorder: baseBorder,
         // TextFormField를 선택했을 때 테두리 색상을 PRIMARY_COLOR로 설정한다
         focusedBorder: baseBorder.copyWith(
           borderSide: baseBorder.borderSide.copyWith(
