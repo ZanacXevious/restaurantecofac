@@ -8,11 +8,17 @@ import 'package:restaurantecofac/common/const/colors.dart';
 import 'package:restaurantecofac/common/layout/default_layout.dart';
 
 import '../../component/custom_test_form_field.dart';
+import '../../view/root_tab.dart';
 
 // StatelessWidget을 상속하는 LoginScreen class를 만들어주세요
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  String username = '';
+  String password = '';
   // build method를 override 해주세요
   @override
   Widget build(BuildContext context) {
@@ -44,20 +50,24 @@ class LoginScreen extends StatelessWidget {
 
               CustomTextFormField(
                 hintText: "이메일을 입력해 주세요",
-                onChanged: (String value) {},
+                onChanged: (String value) {
+                  username = value;
+                },
               ),
               const SizedBox(height: 16),
               // password field
               CustomTextFormField(
                 hintText: "비밀번호를 입력해 주세요",
                 obscureText: true,
-                onChanged: (String value) {},
+                onChanged: (String value) {
+                  password = value;
+                },
               ),
               const SizedBox(height: 16),
               ElevatedButton(
                   onPressed: () async {
                     // ID:비밀번호
-                    final rawString = 'test@codefactory.ai:testtest';
+                    final rawString = '$username:$password';
 
                     Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
@@ -69,6 +79,12 @@ class LoginScreen extends StatelessWidget {
                         headers: {
                           'authorization': 'Basic $token',
                         },
+                      ),
+                    );
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => RootTab(),
                       ),
                     );
 
