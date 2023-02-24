@@ -1,4 +1,8 @@
 //material package를 import 해주세요
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurantecofac/common/const/colors.dart';
 import 'package:restaurantecofac/common/layout/default_layout.dart';
@@ -12,6 +16,13 @@ class LoginScreen extends StatelessWidget {
   // build method를 override 해주세요
   @override
   Widget build(BuildContext context) {
+    final dio = Dio();
+
+    // localhost emulator
+    final emulatorIp = '10.0.2.2:3000';
+    final simulatorIP = '127.0.0.1:3000';
+    final ip = Platform.isIOS ? simulatorIP : emulatorIp;
+
     return DefaultLayout(
         child: SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -44,7 +55,25 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    // ID:비밀번호
+                    final rawString = 'test@codefactory.ai:testtest';
+
+                    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+
+                    String token = stringToBase64.encode(rawString);
+
+                    final resp = await dio.post(
+                      'http://$ip/auth/login',
+                      options: Options(
+                        headers: {
+                          'authorization': 'Basic $token',
+                        },
+                      ),
+                    );
+
+                    print(resp.data);
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: PRIMARY_COLOR,
                   ),
