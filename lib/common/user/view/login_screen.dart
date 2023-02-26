@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:restaurantecofac/common/const/colors.dart';
+import 'package:restaurantecofac/common/const/data.dart';
 import 'package:restaurantecofac/common/layout/default_layout.dart';
 
 import '../../component/custom_test_form_field.dart';
@@ -23,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final dio = Dio();
-
     // localhost emulator
     final emulatorIp = '10.0.2.2:3000';
     final simulatorIP = '127.0.0.1:3000';
@@ -81,6 +82,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     );
+
+                    final refreshToken = resp.data['refreshToken'];
+                    final accessToken = resp.data['accessToken'];
+
+                    await storage.write(
+                        key: REFRESH_TOKEN_KEY, value: refreshToken);
+                    await storage.write(
+                        key: ACCESS_TOKEN_KEY, value: accessToken);
 
                     Navigator.of(context).push(
                       MaterialPageRoute(

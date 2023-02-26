@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurantecofac/common/component/custom_test_form_field.dart';
 import 'package:restaurantecofac/common/user/view/login_screen.dart';
+import 'package:restaurantecofac/common/view/splash_screen.dart';
 
 void main() {
   runApp(_App());
@@ -14,7 +15,7 @@ class _App extends StatelessWidget {
       theme: ThemeData(fontFamily: 'NotoSans'),
       // remove debug banner
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
