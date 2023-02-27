@@ -25,10 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final dio = Dio();
-    // localhost emulator
-    final emulatorIp = '10.0.2.2:3000';
-    final simulatorIP = '127.0.0.1:3000';
-    final ip = Platform.isIOS ? simulatorIP : emulatorIp;
 
     return DefaultLayout(
         child: SingleChildScrollView(
@@ -104,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: const Text("로그인")),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () async {},
                   style: TextButton.styleFrom(primary: Colors.black),
                   child: const Text("회원가입")),
             ],
